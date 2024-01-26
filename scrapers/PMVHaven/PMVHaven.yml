@@ -8,5 +8,4 @@ sceneByURL:
     script:
       - python
       - PMVHaven.py
-      - sceneByURL
-# Last Updated January 1, 2024
+# Last Updated December 30, 2023

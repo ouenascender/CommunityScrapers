@@ -144,9 +144,7 @@ xPathScrapers:
       Height:
         selector: //span[text()='Height:']/following-sibling::span/a
         postProcess:
-          - replace:
-            - regex: \scm
-              with: ""
+          - feetToCm: true
           - map:
               Unknown: ""
       Measurements:
@@ -198,7 +196,8 @@ xPathScrapers:
         selector: //span[@data-test="link_span_weight"]
         postProcess:
           - replace:
-            - regex: \skg
+            - regex: \slbs
               with: ""
+          - lbToKg: true
 
-# Last Updated January 2, 2024
+# Last Updated January 19, 2023

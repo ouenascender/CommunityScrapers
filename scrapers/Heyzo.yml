@@ -10,17 +10,20 @@ sceneByFragment:
   # constructs the movie URL from the filename, provided that the filename includes the movie id
   queryURLReplace:
     filename:
-      # heyzo uses a 4 digit number for ids, here we take a series of numbers just to be safe
       - regex: (.*[^a-zA-Z\d])*(\d+)[^a-zA-Z\d].*
-        with: $2/index.html
+        # heyzo uses a 4 digit number for ids, here we take a series of numbers just to be safe
+        with: $2
+      - regex: $
+        with: /index.html
   scraper: sceneScraper
 
 xPathScrapers:
   sceneScraper:
     common:
       $table: //div[@class="info-bg"]/table/tbody/tr
-      $movieObject: //script[contains(.,"movie_obj")]/text()
     scene:
+      Details: /html/head/title/text()
+      #Details: //section/div[@id="movie"]/h1
       Date:
         selector: $table/td[contains(.,"Released")]/following-sibling::td/text()
         postProcess:
@@ -28,26 +31,20 @@ xPathScrapers:
       Performers:
         Name: $table/td[contains(.,"Actress")]/following-sibling::td/a/text()
       Image:
-        selector: $movieObject
+        selector: //script[contains(.,"emimg")]
         postProcess:
           - replace:
-              - regex: .*thumbnail"\s*:\s*"([^"]+).*
+              - regex: .*emimg\s=\s\"([^"]+).*
                 with: https:$1
       Title:
-        selector: $movieObject
+        selector: //script[contains(.,"movieId =")]
         postProcess:
           - replace:
-              - regex: .*name"\s*:\s*"([^"]+).*
-                with: $1
-      Code:
-        selector: //script[contains(.,"movieId")]/text()
-        postProcess:
-          - replace:
-              - regex: .*movieId\s*=\s*"([^"]+).*
-                with: $1
+              - regex: .*movieId\s=\s\"(\d+)\".*
+                with: Heyzo $1
       Tags:
         Name: $table/td[contains(.,"Type") or contains(.,"Sex Styles") or contains(.,"Theme") ]/following-sibling::td/a/text()
       Studio:
         Name:
           fixed: Heyzo
-# Last Updated January 16, 2024
+# Last Updated November 08, 2020

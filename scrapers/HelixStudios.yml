@@ -48,13 +48,17 @@ xPathScrapers:
       $info: //div[@class="text"]
     scene:
       Title:
-        selector: //div[@class="video-info"]/span[1]/text()
+        selector: //title/text()
+        postProcess:
+          - replace:
+              - regex: \s*- Helix Studios.*$
+                with:
       Date:
         selector: //div[@class="info-items"]/span[@class="info-item date"]/text()
         postProcess:
           - parseDate: January 2, 2006
       Details:
-        selector: //div[contains(@class, "description-content")]/p[node()]
+        selector: //div[contains(@class, "description-content")]/p/text()
         concat: "#LINEBREAK#"
         postProcess:
           - replace:
@@ -140,4 +144,4 @@ xPathScrapers:
           - replace:
               - regex: $
                 with: " "
-# Last Updated January 14, 2024
+# Last Updated February 20, 2023

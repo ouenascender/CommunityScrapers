@@ -20,7 +20,7 @@ xPathScrapers:
           fixed: BelAmi
       Performers:
         Name:
-          selector: //div[@class="actors_list"]//text()[not(contains(.,"Show more actors"))]
+          selector: //div[@class="actors_list"]//text()
       Image:
         selector: //div[@class="video_player"]//a[contains(@href,"Screen-")]/@href
         postProcess:
@@ -28,25 +28,11 @@ xPathScrapers:
               - regex: .*?Screen-([1-9].*)
                 with: https://freecdn.belamionline.com/Data/Contents/Content_$1/Thumbnail6.jpg
       Tags:
-        Name:
-          selector: //*[@id="ContentPlaceHolder1_LabelTags"]/a
-          postProcess:
-            - map:
-                Castings: "Casting"
-                Condom Free: "No Condom"
-                Condom Free Archive: "No Condom"
-                Condom Archive: "Condom"
-                Photosession Videos: "Photoshoot"
-                Oral: "Blowjob"
-                Orgies: "Orgy (Gay)"
-                Remastered: "Remaster"
-                Solos: "Solo Male"
-                Sex Scenes: "Gay"
-                Three Way: "Threesome (Gay)"
+        Name: //*[@id="ContentPlaceHolder1_LabelTags"]/a
       Code:
         selector: //form[@method="post"]/@action
         postProcess:
           - replace:
               - regex: ^.*\=\s*
                 with:
-# Last Updated January 13, 2024
+# Last Updated January 29, 2023

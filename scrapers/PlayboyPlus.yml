@@ -30,12 +30,13 @@ xPathScrapers:
         postProcess:
           - parseDate: January 2, 2006
       Performers: &performers
-        Name: //p[@class="contributorName"]//a[contains(@href, "profile")]
+        Name: //p[@class="contributorName"]//a
       Details: &details
-        selector: //p[@class="description-truncated"] | //p[@class="description-truncated"]/following-sibling::*
+        selector: //span[@id="ellipsis"]/preceding-sibling::text()|//span[@id="description-more"]/text()
+        concat: "|"
         postProcess:
           - replace:
-              - regex: \s*\.{3}
+              - regex: \|
                 with: ""
       Image:
         selector: //div[@class="imageContainer"]//img/@data-src
@@ -47,7 +48,6 @@ xPathScrapers:
       Title: *title
       Date: *date
       Performers: *performers
-      Photographer: //p[@class="contributorName"]//a[contains(@href, "photographer")]
       Details: *details
       Studio: *studio
 # Last Updated March 27, 2023

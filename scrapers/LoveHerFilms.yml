@@ -1,4 +1,4 @@
-name: LoveHerFilms
+name: LoveHerFeet
 sceneByURL:
   - action: scrapeXPath
     url:
